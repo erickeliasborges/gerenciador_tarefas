@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gerenciador_tarefas_utfpr/pages/filtro_page.dart';
 import '../model/tarefa.dart';
 import '../widgets/conteudo_form_dialog.dart';
 
@@ -15,11 +16,9 @@ class _ListaTarefasPageState extends State<ListaTarefasPage>{
   static const ACAO_EXCLUIR = 'excluir';
 
   final tarefas = <Tarefa>[
-    Tarefa(id: 1, descricao: 'Exercícios em sala de aula',
-    prazo: DateTime.now().add(Duration(days: 5))
-    ),
+
   ];
-   int _ultimoId = 1;
+   int _ultimoId = 0;
 
   @override
   Widget build(BuildContext context){
@@ -39,7 +38,7 @@ class _ListaTarefasPageState extends State<ListaTarefasPage>{
       title: Text('Gerenciador de Tarefas'),
       actions: [
         IconButton(
-            onPressed: () {},
+            onPressed: _abrirPaginaFiltro,
             icon: Icon(Icons.filter_list)),
       ],
     );
@@ -74,6 +73,15 @@ class _ListaTarefasPageState extends State<ListaTarefasPage>{
         separatorBuilder: (BuildContext context, int index) => Divider(),
         itemCount: tarefas.length,
     );
+  }
+
+  void _abrirPaginaFiltro(){
+    final navigator = Navigator.of(context);
+    navigator.pushNamed(FiltroPage.routeName).then((alterouValores) {
+      if(alterouValores == true){
+        ////
+      }
+    });
   }
 
   List<PopupMenuEntry<String>> criarItensMenuPopup(){
@@ -129,6 +137,8 @@ class _ListaTarefasPageState extends State<ListaTarefasPage>{
                       }else{
                         tarefas[indice] = novaTarefa;
                       }
+                      tarefas.add(novaTarefa);
+
                     });
                     Navigator.of(context).pop();
                   }

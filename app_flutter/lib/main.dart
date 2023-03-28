@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:app_flutter/pages/lista_tarefas_page.dart';
+import 'package:gerenciador_tarefas_utfpr/pages/filtro_page.dart';
+import 'package:gerenciador_tarefas_utfpr/pages/lista_tarefas_page.dart';
 
 void main() {
   runApp(const CadastroApp());
@@ -18,6 +19,9 @@ class CadastroApp extends StatelessWidget {
         primarySwatch: Colors.green,
       ),
       home: ListaTarefasPage(),
+      routes: {
+        FiltroPage.routeName: (BuildContext context) => FiltroPage(),
+      },
     );
   }
 }
